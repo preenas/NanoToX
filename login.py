@@ -2,11 +2,12 @@ import streamlit as st
 from supabase import create_client, Client
 from PIL import Image
 import re
-
+import os
 st.set_page_config(page_title="NanoToX Authentication", layout="centered")
-head = Image.open("/workspaces/NanoToX/head.png")
+BASE_DIR = os.path.dirname(__file__)
+head_path = os.path.join(BASE_DIR, "head.png")
 # ---------- Header ----------
-st.image(head, use_container_width=True)
+st.image(head_path, use_container_width=True)
 
 # ---------- Supabase ----------
 SUPABASE_URL = st.secrets["supabase"]["url"]
