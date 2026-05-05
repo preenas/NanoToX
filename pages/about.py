@@ -1,9 +1,18 @@
 import streamlit as st
 from PIL import Image
+import streamlit.components.v1 as components
 import os
 import base64
 
+# ================= PAGE CONFIG ================= #
 st.set_page_config(page_title="Gopi Mohan - About", layout="wide")
+
+# ================= BASE DIRECTORY ================= #
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+
+
+def img(file):
+    return os.path.join(BASE_DIR, file)
 
 # ---------------- CUSTOM CSS ---------------- #
 st.markdown("""
@@ -97,8 +106,8 @@ st.markdown("<div style='height:40px;'></div>", unsafe_allow_html=True)
 col1, col2 = st.columns([1.2, 2])
 
 with col1:
-    image = Image.open("/workspaces/NanoToX/sir1.png")
-    st.image(image,width=400)
+    st.image(img("sir1.png"), width=400)
+
 
 with col2:
     st.markdown("<div class='name-style'>Dr. Gopi Mohan C.</div>", unsafe_allow_html=True)
@@ -178,28 +187,28 @@ col1, col2, col3, col4 = st.columns(4)
 
 with col1:
     st.markdown("<div class='scholar-card'>", unsafe_allow_html=True)
-    st.image(load_square_image("pic1.jpg"), width=160)
+    st.image(img("pic1.jpg"), width=160)
     st.markdown("<div class='scholar-name'>Abdul Rahoof S.</div>", unsafe_allow_html=True)
     st.markdown("<div class='scholar-role'>Ph.D. Scholar</div>", unsafe_allow_html=True)
     st.markdown("</div>", unsafe_allow_html=True)
 
 with col2:
     st.markdown("<div class='scholar-card'>", unsafe_allow_html=True)
-    st.image(load_square_image("pic2.png"), width=160)
+    st.image(img("pic2.png"), width=160)
     st.markdown("<div class='scholar-name'>Preena S. Parvathy</div>", unsafe_allow_html=True)
     st.markdown("<div class='scholar-role'>Ph.D. Scholar</div>", unsafe_allow_html=True)
     st.markdown("</div>", unsafe_allow_html=True)
 
 with col3:
     st.markdown("<div class='scholar-card'>", unsafe_allow_html=True)
-    st.image(load_square_image("pic3.jpg"), width=160)
+    st.image(img("pic3.png"), width=160)
     st.markdown("<div class='scholar-name'>Reshmi R.</div>", unsafe_allow_html=True)
     st.markdown("<div class='scholar-role'>Ph.D. Scholar</div>", unsafe_allow_html=True)
     st.markdown("</div>", unsafe_allow_html=True)
 
 with col4:
     st.markdown("<div class='scholar-card'>", unsafe_allow_html=True)
-    st.image(load_square_image("pic4.jpg"), width=160)
+    st.image(img("pic4.png"), width=160)
     st.markdown("<div class='scholar-name'>Lakshmi A. Nair</div>", unsafe_allow_html=True)
     st.markdown("<div class='scholar-role'>Ph.D. Scholar</div>", unsafe_allow_html=True)
     st.markdown("</div>", unsafe_allow_html=True)
