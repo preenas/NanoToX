@@ -19,8 +19,13 @@ header {visibility: hidden;}
 """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
-logo = Image.open("/workspaces/NanoToX/nanotox1-logo.png")
-title_img = Image.open("/workspaces/NanoToX/title1.png")
+BASE_DIR = os.path.dirname(__file__)
+
+logo_path = os.path.join(BASE_DIR, "nanotox1-logo.png")
+title_path = os.path.join(BASE_DIR, "title1.png")
+
+logo = Image.open(logo_path)
+title_img = Image.open(title_path)
 
 # ================= HEADER ================= #
 col1, col2, col3, col4 = st.columns([0.5, 1, 2.5, 1])
