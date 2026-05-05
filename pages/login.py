@@ -4,14 +4,26 @@ import re
 import os
 from auth import login_user, signup_user, init_session
 from pages.ui_utils import hide_streamlit
+
 st.set_page_config(page_title="NanoToX Authentication", layout="centered")
+
 hide_streamlit()
 init_session()
 
-# Header image
-BASE_DIR = os.path.dirname(__file__)
+# ================= SAFE PATH ================= #
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+
 head_path = os.path.join(BASE_DIR, "head.png")
-st.image("head.png", use_container_width=True)
+
+
+# ================= HEADER ================= #
+try:
+    head = Image.open(head_path)
+    st.image(head, use_container_width=True)
+except:
+    st.warning("Header image not found (head.png)")
+
+# ================= SESSION ================= #
 
 if "auth_page" not in st.session_state:
     st.session_state.auth_page = "login"
