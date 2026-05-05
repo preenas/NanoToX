@@ -2,6 +2,7 @@ import streamlit as st
 from PIL import Image
 import re
 import os
+
 from auth import login_user, signup_user, init_session
 from pages.ui_utils import hide_streamlit
 
@@ -10,21 +11,21 @@ st.set_page_config(page_title="NanoToX Authentication", layout="centered")
 hide_streamlit()
 init_session()
 
-# ================= SAFE PATH ================= #
+# ================= SAFE BASE PATH ================= #
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 
-head_path = os.path.join(BASE_DIR, "head.png")
+def img_path(filename):
+    return os.path.join(BASE_DIR, filename)
 
+# ================= HEADER IMAGE ================= #
+head_path = img_path("head.png")
 
-# ================= HEADER ================= #
-try:
-    head = Image.open(head_path)
-    st.image(head, use_container_width=True)
-except:
+if os.path.exists(head_path):
+    st.image(Image.open(head_path), use_container_width=True)
+else:
     st.warning("Header image not found (head.png)")
 
 # ================= SESSION ================= #
-
 if "auth_page" not in st.session_state:
     st.session_state.auth_page = "login"
 
@@ -32,7 +33,7 @@ def switch(page):
     st.session_state.auth_page = page
     st.rerun()
 
-# Password validation
+# ================= PASSWORD VALIDATION ================= #
 def validate_password(password, confirm):
     if len(password) < 8:
         return "Password must be at least 8 characters"
