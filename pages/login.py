@@ -3,35 +3,36 @@ from PIL import Image
 import re
 import os
 
-from auth import login_user, signup_user, init_session
 from pages.ui_utils import hide_streamlit
 
 st.set_page_config(page_title="NanoToX Authentication", layout="centered")
 
 hide_streamlit()
-init_session()
 
-# ================= SAFE BASE PATH ================= #
-BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-
-def img_path(filename):
-    return os.path.join(BASE_DIR, filename)
-
-# ================= HEADER IMAGE ================= #
-head_path = img_path("head.png")
-
-if os.path.exists(head_path):
-    st.image(Image.open(head_path), use_container_width=True)
-else:
-    st.warning("Header image not found (head.png)")
-
-# ================= SESSION ================= #
+# ================= SESSION INIT ================= #
 if "auth_page" not in st.session_state:
     st.session_state.auth_page = "login"
+
+if "users" not in st.session_state:
+    st.session_state.users = {}   # MOCK DATABASE
+
+if "user_name" not in st.session_state:
+    st.session_state.user_name = ""
 
 def switch(page):
     st.session_state.auth_page = page
     st.rerun()
+
+# ================= SAFE PATH ================= #
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+head_path = os.path.join(BASE_DIR, "head.png")
+
+# ================= HEADER ================= #
+try:
+    head = Image.open(head_path)
+    st.image(head, use_container_width=True)
+except:
+    st.warning("Header image not found (head.png)")
 
 # ================= PASSWORD VALIDATION ================= #
 def validate_password(password, confirm):
@@ -50,7 +51,7 @@ def validate_password(password, confirm):
     return None
 
 # =================================================
-# LOGIN
+# LOGIN (MOCK)
 # =================================================
 if st.session_state.auth_page == "login":
 
@@ -60,9 +61,8 @@ if st.session_state.auth_page == "login":
     password = st.text_input("Password", type="password")
 
     if st.button("Login"):
-        success = login_user(email, password)
-
-        if success:
+        if email in st.session_state.users and st.session_state.users[email]["password"] == password:
+            st.session_state.user_name = st.session_state.users[email]["first_name"]
             st.success(f"Welcome {st.session_state.user_name} 👋")
             st.switch_page("Home_page.py")
         else:
@@ -76,7 +76,7 @@ if st.session_state.auth_page == "login":
         switch("signup")
 
 # =================================================
-# SIGNUP
+# SIGNUP (MOCK STORAGE)
 # =================================================
 elif st.session_state.auth_page == "signup":
 
@@ -100,7 +100,9 @@ elif st.session_state.auth_page == "signup":
         if error:
             st.error(error)
         else:
-            metadata = {
+            # MOCK SAVE
+            st.session_state.users[email] = {
+                "password": password,
                 "first_name": first_name,
                 "last_name": last_name,
                 "account_type": account_type,
@@ -108,35 +110,28 @@ elif st.session_state.auth_page == "signup":
                 "country": country
             }
 
-            success = signup_user(email, password, metadata)
-
-            if success:
-                st.success("Account created! Check your email to verify.")
-                switch("login")
-            else:
-                st.error("Signup failed")
+            st.success("Account created successfully (stored in session memory)")
+            switch("login")
 
     if st.button("Already have an account? Login"):
         switch("login")
 
 # =================================================
-# RESET PASSWORD
+# RESET (MOCK)
 # =================================================
 elif st.session_state.auth_page == "reset":
-
-    from auth import supabase
 
     st.markdown("## 🔄 Reset Password")
 
     email = st.text_input("Enter your email")
 
     if st.button("Send Reset Link"):
-        try:
-            supabase.auth.reset_password_for_email(email)
-            st.success("Reset link sent!")
-            switch("login")
-        except:
-            st.error("Error sending reset email")
+        if email in st.session_state.users:
+            st.success("Reset link sent (simulated)")
+        else:
+            st.error("Email not found")
+
+        switch("login")
 
     if st.button("Back to Login"):
         switch("login")
