@@ -2,9 +2,10 @@ import streamlit as st
 from PIL import Image
 import os
 import base64
-
+from pages.ui_utils import hide_streamlit
 # ================= PAGE CONFIG ================= #
 st.set_page_config(page_title="Gopi Mohan - About", layout="wide")
+hide_streamlit()
 
 # ================= BASE DIRECTORY ================= #
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))

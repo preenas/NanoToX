@@ -22,7 +22,11 @@ features = joblib.load(os.path.join("pages", "feature_columns.pkl"))
 # =========================
 try:
     head = Image.open("head.png")
-    st.image(head, width=900)
+    col1, col2, col3 = st.columns([1, 2, 1])
+
+    with col2:
+        st.image(head, use_container_width=True)
+
 except:
     st.warning("Header image not found")
 
