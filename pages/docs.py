@@ -72,14 +72,13 @@ st.markdown('<div class="section">🔍 Overview</div>', unsafe_allow_html=True)
 
 st.markdown("""
 <p class="text">
-NanoTox is an AI-driven platform designed to predict nanoparticle toxicity and cell viability 
-based on physicochemical and biological parameters. It enables rapid in silico screening, 
-reducing reliance on time-consuming and costly experimental methods.
+NanoTox is an advanced AI-driven computational platform developed to predict nanoparticle toxicity and cellular viability by integrating diverse physicochemical, structural, and biological parameters. By leveraging machine learning algorithms and predictive modeling, NanoTox enables rapid, accurate, and high-throughput in silico screening of nanomaterials, significantly reducing dependence on traditional experimental approaches that are often costly, labor-intensive, and time-consuming.
+The platform serves as a powerful decision-support system for researchers, enabling early identification of potential toxicological risks associated with engineered nanomaterials during the initial stages of product development. Through its Safe-by-Design framework, NanoTox supports the rational design and optimization of safer nanoparticles by facilitating informed modifications before extensive laboratory validation.
+In addition to accelerating nanotoxicology assessments, NanoTox contributes to sustainable nanotechnology innovation by improving research efficiency, minimizing resource expenditure, and promoting regulatory-conscious material development. This integrated approach not only enhances safety evaluation but also supports the development of biocompatible nanomaterials for applications in medicine, drug delivery, environmental science, and industrial nanotechnology.
 </p>
 
 <p class="text">
-The system supports Safe-by-Design nanomaterial development by identifying potential risks 
-early in the research pipeline.
+NanoTox ultimately bridges artificial intelligence and nanotechnology to foster safer, smarter, and more sustainable innovation in next-generation nanomaterial development.
 </p>
 """, unsafe_allow_html=True)
 
@@ -191,6 +190,7 @@ st.markdown("""
 st.markdown("""
 <hr>
 <center style='color:#64748b'>
-NanoTox Documentation • AI for Safer Nanomaterials
+NanoTox Documentation • AI for Safer Nanomaterials<br>
+Developed by <b>Soorya Narayan, Preena S. Parvathy & C. Gopi Mohan</b>
 </center>
 """, unsafe_allow_html=True)
