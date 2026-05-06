@@ -4,3 +4,5 @@ numpy
 Pillow
 joblib
 openpyxl
+scikit-learn
+xgboost
